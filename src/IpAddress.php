@@ -62,6 +62,10 @@ class IpAddress implements MiddlewareInterface
         $attributeName = null,
         array $headersToInspect = []
     ) {
+        if ($checkProxyHeaders && empty($trustedProxies)) {
+            throw new \InvalidArgumentException('You must provide a list of trusted proxies for proxy header checks');
+        }
+        
         $this->checkProxyHeaders = $checkProxyHeaders;
         $this->trustedProxies = $trustedProxies;
 
